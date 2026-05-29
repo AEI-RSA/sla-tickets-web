@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import re
 from datetime import datetime, timedelta
+import pytz
 
 # ---------------- CONFIG ----------------
 
@@ -115,7 +116,9 @@ with col1:
 
                 vence = fecha + timedelta(hours=sla)
 
-                ahora = datetime.now()
+                # HORA PERÚ
+                zona_peru = pytz.timezone("America/Lima")
+                ahora = datetime.now(zona_peru).replace(tzinfo=None)
 
                 trans = (ahora - fecha).total_seconds() / 3600
 
